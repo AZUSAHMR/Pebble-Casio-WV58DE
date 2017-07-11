@@ -21,6 +21,8 @@ enum ConfigKeys {
 	W_COND=93
 };
 
+char * wdayString[] = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
+
 typedef struct {
 	bool inv;
 	uint8_t showsec, showbatt;
@@ -265,8 +267,8 @@ void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 		//snprintf(ddmmBuffer, sizeof(ddmmBuffer), "%d", rc.origin.x);
 		text_layer_set_text(ddmm_layer, ddmmBuffer);
 		
-		strftime(wdBuffer, sizeof(wdBuffer), "%a", tick_time);
-		//strcpy(wdBuffer, "sáb");
+		//strftime(wdBuffer, sizeof(wdBuffer), "%a", tick_time);
+		strcpy(wdBuffer, wdayString[tick_time->tm_wday]);
 		upcase(wdBuffer);
 		text_layer_set_text(wd_layer, wdBuffer);
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "WeekDay: %s", wdBuffer);
